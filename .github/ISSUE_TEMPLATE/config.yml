@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discord Community
+    url: # Add your Discord community link here
+    about: Join our Discord community for questions and discussions
+  - name: Documentation
+    url: # Add your documentation link here
+    about: Check our documentation for guides and FAQs 
