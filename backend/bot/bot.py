@@ -1,12 +1,13 @@
 import discord
-from discord.ext import commands
+from discord import app_commands
 from bot.config import BOT_TOKEN, GUILD_ID
 
-class LinkedInBot(commands.Bot):
+class LinkedInBot(discord.Client):
     def __init__(self):
         intents = discord.Intents.default()
         intents.message_content = True
-        super().__init__(command_prefix="!", intents=intents)
+        super().__init__(intents=intents)
+        self.tree = app_commands.CommandTree(self)
         
     async def setup_hook(self):
         # Load test commands cog
@@ -20,11 +21,22 @@ class LinkedInBot(commands.Bot):
     async def on_ready(self):
         print(f"Bot is ready! Logged in as {self.user}")
         print(f"Connected to {len(self.guilds)} guilds")
-        
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.errors.CommandNotFound):
+
+    async def send_linkedin_update(self, channel_id: int, content: str, url: str):
+        """Send LinkedIn post update to specified Discord channel"""
+        channel = self.get_channel(channel_id)
+        if not channel:
             return
-        raise error
+        
+        embed = discord.Embed(
+            title="New LinkedIn Post",
+            description=content[:2000] if content else "No content available",
+            color=discord.Color.blue(),
+            url=url
+        )
+        embed.set_footer(text="Posted via LinkedIn")
+        
+        await channel.send(embed=embed)
 
 def run_bot():
     bot = LinkedInBot()

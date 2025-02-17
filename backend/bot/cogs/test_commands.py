@@ -4,7 +4,7 @@ from discord import app_commands
 from typing import Optional
 
 class TestCommands(commands.Cog):
-    def __init__(self, bot: commands.Bot):
+    def __init__(self, bot):
         self.bot = bot
         
     @app_commands.command(name="ping", description="Test the bot's response time")
@@ -44,5 +44,15 @@ class TestCommands(commands.Cog):
         )
         await interaction.response.send_message(embed=embed)
 
-async def setup(bot: commands.Bot):
+    @app_commands.command(name='test_linkedin_update', description="Test sending a LinkedIn update")
+    async def test_linkedin_update(self, interaction: discord.Interaction):
+        """Test sending a LinkedIn update to a Discord channel."""
+        channel_id = interaction.channel_id
+        content = "This is a test LinkedIn update."
+        url = "https://www.linkedin.com"
+        
+        await self.bot.send_linkedin_update(channel_id, content, url)
+        await interaction.response.send_message("Test LinkedIn update sent!", ephemeral=True)
+
+async def setup(bot):
     await bot.add_cog(TestCommands(bot)) 
