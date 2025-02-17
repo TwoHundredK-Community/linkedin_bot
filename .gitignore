@@ -1,0 +1,37 @@
+# Backend
+backend/venv/
+backend/venv/bin/
+backend/venv/lib/
+backend/venv/include/
+backend/venv/Scripts/
+backend/venv/pyvenv.cfg
+backend/.env
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+# Python cache files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# General
+.DS_Store
+*.log 
